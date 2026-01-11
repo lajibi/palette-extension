@@ -7,6 +7,15 @@ A professional, high-fidelity color extraction extension for Chrome. Capture col
 
 ---
 
+## 📸 预览 | Preview
+
+<!-- 确保你的仓库根目录下有一张名为 preview.png 的图片 -->
+<p align="center">
+  <img src="./preview.png" alt="Palette Workshop UI" width="380">
+</p>
+
+---
+
 ## ✨ 核心特性 | Features
 
 - **🎯 智能色彩分析**：采用 K-Means 聚类算法，精准识别并提取图片中的核心色调。
@@ -41,13 +50,6 @@ A professional, high-fidelity color extraction extension for Chrome. Capture col
 - **Canvas API**：高效的图像采样与色卡生成。
 - **K-Means Algorithm**：自定义实现的机器学习聚类算法，用于色彩量化。
 - **Chrome Extension API (Manifest V3)**：利用最新的扩展程序规范，支持 Side Panel 侧边栏常驻。
-
----
-
-## 📸 预览 | Preview
-
-*(建议在此处上传一张截图到 GitHub 并更新链接)*
-![Palette Workshop UI](https://via.placeholder.com/380x600/0c0c0e/ffffff?text=Palette+Workshop+Preview)
 
 ---
 
