@@ -1,0 +1,27 @@
+
+{
+  "manifest_version": 3,
+  "name": "色谱工坊 - 专业取色插件",
+  "version": "1.0.3",
+  "description": "由 KING 开发的高保真色彩提取工具。支持智能图片分析、生成精美色卡并一键导出。",
+  "icons": {
+    "128": "icon.png"
+  },
+  "action": {
+    "default_title": "打开色谱工坊"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "side_panel": {
+    "default_path": "index.html"
+  },
+  "permissions": [
+    "sidePanel"
+  ],
+  "offline_enabled": true,
+  "optional_host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ]
+}

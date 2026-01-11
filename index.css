@@ -1,0 +1,277 @@
+
+:root {
+    --bg: #0c0c0e;
+    --surface: #1c1c1f;
+    --border: rgba(255, 255, 255, 0.08);
+    --text: #ffffff;
+    --text-dim: #88888e;
+    --primary: #fff;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0 auto;
+    padding: 0;
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    background: var(--bg);
+    color: var(--text);
+    
+    /* 保持细长的 App 风格布局 */
+    width: 100%;
+    max-width: 380px; 
+    min-height: 100vh;
+    
+    display: flex;
+    flex-direction: column;
+}
+
+/* 拖拽时的覆盖层样式 */
+body.dragging::after {
+    content: "释放以分析图片";
+    position: fixed;
+    inset: 16px;
+    background: rgba(12, 12, 14, 0.95);
+    border: 2px dashed var(--text);
+    border-radius: 12px;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text);
+    pointer-events: none; /* 防止遮挡 drop 事件 */
+    backdrop-filter: blur(4px);
+}
+
+.palette-plugin-container {
+    padding: 16px;
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.plugin-header,
+.plugin-main {
+    position: relative;
+    z-index: 10;
+}
+
+.plugin-header {
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.brand small {
+    font-weight: 400;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+}
+
+.dev-signature {
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    opacity: 0.7;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.image-box {
+    width: 100%;
+    background: var(--surface);
+    border: 1px dashed var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    transition: all 0.2s;
+    min-height: 160px;
+}
+
+.image-box:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.img-preview {
+    display: block;
+    max-width: 100%;
+    max-height: 300px; 
+    width: auto;
+    height: auto;
+    object-fit: contain; 
+}
+
+.placeholder {
+    color: var(--text-dim);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.controls-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.slider-box {
+    flex: 1;
+}
+
+.slider-box label {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    margin-bottom: 4px;
+}
+
+.slider-box input {
+    width: 100%;
+    accent-color: var(--primary);
+    cursor: pointer;
+}
+
+.icon-btn {
+    background: var(--primary);
+    color: #000;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0; 
+    transition: opacity 0.2s, transform 0.1s;
+}
+
+.icon-btn:hover {
+    opacity: 0.9;
+}
+
+.icon-btn:active {
+    transform: scale(0.95);
+}
+
+.icon-btn:disabled {
+    opacity: 0.2;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.palette-grid {
+    display: grid;
+    gap: 2px;
+    width: 100%;
+    aspect-ratio: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 2px;
+}
+
+.color-block {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    transition: transform 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.color-block:hover {
+    transform: scale(1.1);
+    z-index: 5;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    border-radius: 4px;
+}
+
+.hex-label {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.6rem; 
+    opacity: 0;
+    transition: opacity 0.2s;
+    font-weight: 700;
+    pointer-events: none;
+}
+
+.color-block:hover .hex-label {
+    opacity: 1;
+}
+
+.hex-label.light { color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.8); }
+.hex-label.dark { color: #000; text-shadow: 0 1px 2px rgba(255,255,255,0.8); }
+
+.color-block.empty {
+    background: #151518;
+}
+
+.skeleton {
+    background: #222;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0.5; }
+}
+
+.footer-stats {
+    margin-top: 12px;
+    text-align: center;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+}
+
+.toast-mini {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    color: #000;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    z-index: 100;
+    pointer-events: none;
+    animation: slideUp 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+@keyframes slideUp {
+    from { transform: translate(-50%, 100%); opacity: 0; }
+    to { transform: translate(-50%, 0); opacity: 1; }
+}

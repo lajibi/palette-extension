@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>色谱工坊</title>
+    <link rel="stylesheet" href="index.css">
+<script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://esm.sh/@google/genai@^1.35.0",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/"
+  }
+}
+</script>
+</head>
+<body>
+    <div class="palette-plugin-container">
+        <!-- 动态背景容器 -->
+        <div id="bg-canvas-container" style="position: absolute; inset: 0; z-index: 0; pointer-events: none;"></div>
+        
+        <header class="plugin-header">
+            <div class="brand">
+                <!-- Grid Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+                <span>色谱工坊 <small>插件版</small></span>
+            </div>
+            <div class="dev-signature">
+                Developed by KING
+            </div>
+        </header>
+
+        <main class="plugin-main">
+            <!-- 图片上传区域 -->
+            <div class="image-box empty" id="image-box">
+                <div class="placeholder" id="placeholder-content">
+                    <!-- Arrow Up Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+                    <span>上传/拖入图片</span>
+                </div>
+                <img id="img-preview" class="img-preview" style="display: none;" />
+                <input type="file" id="file-input" hidden accept="image/*" />
+            </div>
+
+            <!-- 控制区域 -->
+            <div class="controls-row">
+                <div class="slider-box">
+                    <label id="slider-label">宫格密度: 6x6 (36色)</label>
+                    <input type="range" id="grid-slider" min="0" max="4" value="2" />
+                </div>
+                <button class="icon-btn" id="download-btn" disabled title="导出色卡">
+                    <!-- Download Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                </button>
+            </div>
+
+            <!-- 色卡宫格 -->
+            <div class="palette-grid" id="palette-grid" style="grid-template-columns: repeat(6, 1fr);">
+                <!-- 动态生成的内容 -->
+            </div>
+            
+            <div class="footer-stats" id="footer-stats" style="display: none;">
+                已生成 6x6 智能宫格
+            </div>
+        </main>
+
+        <!-- Toast 提示 -->
+        <div id="toast" class="toast-mini" style="display: none;"></div>
+    </div>
+
+    <!-- 恢复原始脚本引用 -->
+    <script type="module" src="index.js"></script>
+</body>
+</html>
