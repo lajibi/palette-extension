@@ -1,5 +1,5 @@
 
-# 色谱工坊 - Palette Workshop 🎨
+# 色谱工坊 - Palette Workshop 🎨 google浏览器插件版
 
 一款专业、高保真的 Chrome 色彩提取扩展插件。通过智能算法从任何图片中提取精美的配色方案，助力设计师与开发者捕捉色彩灵感。
 
